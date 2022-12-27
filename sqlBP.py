@@ -35,7 +35,6 @@ def reg(login, psw):
         "status": False
     }
 
-
 def get_user_id(login):
     ''' Эта функция возвращает id '''
     db.row_factory = sqlite3.Row
@@ -50,7 +49,7 @@ def get_user_id(login):
     return {
         "id": res[0]["id"]
     }
-
+#get user id надо для self.session!!!! Удалять нельзя
 
 def log(login, psw):
     ''' Эта функция логинит юзера '''
@@ -97,3 +96,18 @@ def chek_psw(user_id, psw):
             "msg": "Пароли не совпали",
             "status": False
         }
+
+def del_profile(user_id):
+    ''' Эта функция удаляет профиль юзера '''
+    db.row_factory = sqlite3.Row
+    cur = db.cursor()
+    cur.execute(
+        f'''
+            DELETE FROM `usersBP` WHERE (`id` = '{user_id}')
+        '''
+    )
+    db.commit()
+    return {
+        "msg": "Профиль был успешно удалён",
+        "status": True
+    }

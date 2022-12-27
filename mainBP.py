@@ -18,6 +18,7 @@ class BeProductive(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('uiBP.ui', self)
+        self.session = {}
         self.reg_btn.clicked.connect(self.__reg)
         self.log_btn.clicked.connect(self.__log)
         self.setWindowTitle('Be Productive')
@@ -66,6 +67,8 @@ class BeProductive(QMainWindow):
         self.Reset_Short.clicked.connect(lambda: self.Short_Reset())
         self.Reset_Long.clicked.connect(lambda: self.Long_Reset())
         self.Add_Task.clicked.connect(lambda: self.add_task())
+        self.Log_Out.clicked.connect(self.__leave_profile)
+        self.Del_Profile.clicked.connect(self.__del_profile)
         self.account.hide()
         self.reg_cont.hide()
 
@@ -185,7 +188,7 @@ class BeProductive(QMainWindow):
         else:
             ui.err_msg_reg2.setText("")
         if len(psw1) < 8:
-            ui.err_msg_reg3.setText("Длина пароля должна быть больше 8")
+            ui.err_msg_reg3.setText("Длина пароля должна быть больше 8-ми")
         else:
             ui.err_msg_reg3.setText("")
             if psw1 == psw2:
@@ -194,6 +197,10 @@ class BeProductive(QMainWindow):
                 if res["status"]:
                     ui.reg_cont.hide()
                     ui.account.show()
+                    self.session["id"] = res["id"]
+                    msg_box = QtWidgets.QMessageBox(ui)
+                    msg_box.setText(res["msg"])
+                    msg_box.show()
                 else:
                     ui.err_msg_reg1.setText("Такой логин занят!")
             else:
@@ -206,6 +213,10 @@ class BeProductive(QMainWindow):
         if res["status"]:
             ui.log_cont.hide()
             ui.account.show()
+            self.session["id"] = res["id"]
+            msg_box = QtWidgets.QMessageBox(ui)
+            msg_box.setText(res["msg"])
+            msg_box.show()
         else:
             ui.err_msg_log.setText(res["msg"])
 
@@ -221,6 +232,35 @@ class BeProductive(QMainWindow):
         ui.err_msg_reg2.setText("")
         ui.err_msg_reg3.setText("")
         ui.err_msg_reg4.setText("")
+
+    def __leave_profile(self):
+        self.__clear_log_reg()
+        self.session.pop("id")
+        ui.account.hide()
+        ui.reg_cont.hide()
+        ui.log_cont.show()
+
+    def __del_profile(self):
+        psw, ok = QtWidgets.QInputDialog.getText(
+            ui,
+            "Внимание!",
+            "Введите пароль:",
+            QtWidgets.QLineEdit.Password
+        )
+        if ok:
+            psw_res = chek_psw(self.session["id"], psw)
+            if psw_res["status"]:
+                del_res = del_profile(self.session["id"])
+                self.__leave_profile()
+                msg_box = QtWidgets.QMessageBox(ui)
+                msg_box.setWindowTitle("Внимание!")
+                msg_box.setText(del_res["msg"])
+                msg_box.show()
+            else:
+                msg_box = QtWidgets.QMessageBox(ui)
+                msg_box.setWindowTitle("Внимание!")
+                msg_box.setText("Неверный пароль!")
+                msg_box.show()
 
 
 def excepthook(exc_type, exc_value, exc_tb):

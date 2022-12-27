@@ -759,14 +759,14 @@ background-color: rgb(186, 73, 73);
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_2">
                <item>
-                <widget class="QPushButton" name="pushButton">
+                <widget class="QPushButton" name="Log_Out">
                  <property name="text">
                   <string>Выйти из профиля</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_2">
+                <widget class="QPushButton" name="Del_Profile">
                  <property name="text">
                   <string>Удалить профиль</string>
                  </property>
