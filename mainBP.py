@@ -71,6 +71,7 @@ class BeProductive(QMainWindow):
         self.Del_Profile.clicked.connect(self.__del_profile)
         self.account.hide()
         self.reg_cont.hide()
+        self.log_flag = False
 
     def add_task(self):
         if self.Enter_Task != "":
@@ -92,6 +93,12 @@ class BeProductive(QMainWindow):
         self.min_sec_format = '{:02d}:{:02d}'.format(m, s)
         self.Pomo_LCD.display(self.min_sec_format)
         self.pomo_seconds -= 1
+        if self.log_flag:
+            count_seconds(self.session["id"])
+            place_res = return_place(self.session["id"])
+            sec_res = return_seconds(self.session["id"])
+            self.Num_place.setText(str(place_res["place"]))
+            self.Num_total.setText(str(sec_res["seconds"]))
         if self.pomo_seconds < 0:
             self.pomo_timer.stop()
             self.Pomo_Start.setText("Начать фокусировку")
@@ -171,6 +178,11 @@ class BeProductive(QMainWindow):
         self.Long_LCD.display(f"{self.long_minutes}:00")
         self.long_flag = True
 
+    def reset_all_timers(self):
+        self.Pomodoro_Reset()
+        self.Short_Reset()
+        self.Long_Reset()
+
     def ref_to_reg(self):
         self.to_reg.clicked.connect(lambda: self.log_cont.hide())
         self.to_reg.clicked.connect(lambda: self.reg_cont.show())
@@ -201,6 +213,7 @@ class BeProductive(QMainWindow):
                     msg_box = QtWidgets.QMessageBox(ui)
                     msg_box.setText(res["msg"])
                     msg_box.show()
+                    self.log_flag = True
                 else:
                     ui.err_msg_reg1.setText("Такой логин занят!")
             else:
@@ -211,12 +224,17 @@ class BeProductive(QMainWindow):
         psw = ui.psw_log.text()
         res = log(login, psw)
         if res["status"]:
+            self.session["id"] = res["id"]
             ui.log_cont.hide()
             ui.account.show()
-            self.session["id"] = res["id"]
             msg_box = QtWidgets.QMessageBox(ui)
             msg_box.setText(res["msg"])
             msg_box.show()
+            self.log_flag = True
+            place_res = return_place(self.session["id"])
+            sec_res = return_seconds(self.session["id"])
+            self.Num_place.setText(str(place_res["place"]))
+            self.Num_total.setText(str(sec_res["seconds"]))
         else:
             ui.err_msg_log.setText(res["msg"])
 
@@ -236,9 +254,11 @@ class BeProductive(QMainWindow):
     def __leave_profile(self):
         self.__clear_log_reg()
         self.session.pop("id")
+        self.reset_all_timers()
         ui.account.hide()
         ui.reg_cont.hide()
         ui.log_cont.show()
+        self.log_flag = False
 
     def __del_profile(self):
         psw, ok = QtWidgets.QInputDialog.getText(
@@ -256,6 +276,8 @@ class BeProductive(QMainWindow):
                 msg_box.setWindowTitle("Внимание!")
                 msg_box.setText(del_res["msg"])
                 msg_box.show()
+                self.reset_all_timers()
+                self.log_flag = False
             else:
                 msg_box = QtWidgets.QMessageBox(ui)
                 msg_box.setWindowTitle("Внимание!")

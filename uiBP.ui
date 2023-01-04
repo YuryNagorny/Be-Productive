@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1424</width>
+    <width>1646</width>
     <height>825</height>
    </rect>
   </property>
@@ -691,30 +691,19 @@ background-color: rgb(186, 73, 73);
              <widget class="QWidget" name="formLayoutWidget_3">
               <property name="geometry">
                <rect>
-                <x>440</x>
-                <y>140</y>
-                <width>741</width>
-                <height>91</height>
+                <x>490</x>
+                <y>110</y>
+                <width>841</width>
+                <height>121</height>
                </rect>
               </property>
               <layout class="QFormLayout" name="formLayout_2">
-               <item row="0" column="1">
-                <widget class="QLabel" name="label_6">
+               <item row="2" column="0">
+                <widget class="QLabel" name="Text_place">
                  <property name="font">
                   <font>
                    <family>Verdana,Geneva,Tahoma,sans-serif</family>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_9">
-                 <property name="font">
-                  <font>
-                   <family>Verdana,Geneva,Tahoma,sans-serif</family>
+                   <pointsize>16</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -722,11 +711,12 @@ background-color: rgb(186, 73, 73);
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="label_10">
+               <item row="2" column="1">
+                <widget class="QLabel" name="Num_place">
                  <property name="font">
                   <font>
                    <family>Verdana,Geneva,Tahoma,sans-serif</family>
+                   <pointsize>16</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -734,11 +724,25 @@ background-color: rgb(186, 73, 73);
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_3">
+               <item row="3" column="1">
+                <widget class="QLabel" name="Num_total">
                  <property name="font">
                   <font>
                    <family>Verdana,Geneva,Tahoma,sans-serif</family>
+                   <pointsize>16</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="Text_total">
+                 <property name="font">
+                  <font>
+                   <family>Verdana,Geneva,Tahoma,sans-serif</family>
+                   <pointsize>16</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -1099,9 +1103,9 @@ QPushButton:hover {
              <widget class="QLabel" name="err_msg_log">
               <property name="geometry">
                <rect>
-                <x>110</x>
+                <x>40</x>
                 <y>30</y>
-                <width>191</width>
+                <width>331</width>
                 <height>20</height>
                </rect>
               </property>
