@@ -4,8 +4,8 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import QTimer
 from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtGui import *
 from sqlBP import *
-
 
 if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
@@ -72,6 +72,36 @@ class BeProductive(QMainWindow):
         self.account.hide()
         self.reg_cont.hide()
         self.log_flag = False
+        self.Frame_color.clicked.connect(self.frame_color)
+        self.App_color.clicked.connect(self.app_color)
+        self.Text_color.clicked.connect(self.text_color)
+        self.palette = self.palette()
+        self.palette.setColor(QPalette.Window, QColor(186, 73, 73))
+        self.palette.setColor(QPalette.Button, QColor(186, 73, 73))
+        self.palette.setColor(QPalette.WindowText, QColor(186, 73, 73))
+        self.setPalette(self.palette)
+        self.color_dialog = QtWidgets.QColorDialog(self)
+        self.color_dialog.currentColorChanged.connect(self.on_currentColorChanged)
+        self.color = QColor(186, 73, 73)
+
+    def frame_color(self):
+        self.color_dialog.exec_()
+        self.palette.setColor(QPalette.Window, self.color)
+        self.setPalette(self.palette)
+
+    def app_color(self):
+        self.color_dialog.exec_()
+        self.palette.setColor(QPalette.Button, self.color)
+        self.setPalette(self.palette)
+
+    def text_color(self):
+        self.color_dialog.exec_()
+        self.palette.setColor(QPalette.WindowText, self.color)
+        self.setPalette(self.palette)
+
+    @QtCore.pyqtSlot(QColor)
+    def on_currentColorChanged(self, color):
+        self.color = color
 
     def add_task(self):
         if self.Enter_Task != "":
@@ -289,9 +319,11 @@ def excepthook(exc_type, exc_value, exc_tb):
     tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
     print("Oбнаружена ошибка !:", tb)
 
+
 if __name__ == '__main__':
     sys.excepthook = excepthook
     app = QApplication(sys.argv)
+    app.setStyle('Fusion')
     ui = BeProductive()
     ui.ref_to_log()
     ui.ref_to_reg()
