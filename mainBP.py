@@ -67,6 +67,8 @@ class BeProductive(QMainWindow):
         self.Reset_Short.clicked.connect(lambda: self.Short_Reset())
         self.Reset_Long.clicked.connect(lambda: self.Long_Reset())
         self.Add_Task.clicked.connect(lambda: self.add_task())
+        self.Del_Cur_Task.clicked.connect(lambda: self.del_cur_task())
+        self.Clear_List.clicked.connect(lambda: self.clear_list())
         self.Log_Out.clicked.connect(self.__leave_profile)
         self.Del_Profile.clicked.connect(self.__del_profile)
         self.account.hide()
@@ -84,17 +86,17 @@ class BeProductive(QMainWindow):
         self.color_dialog.currentColorChanged.connect(self.on_currentColorChanged)
         self.color = QColor(186, 73, 73)
 
-    def frame_color(self):
+    def frame_color(self): #изменение цвета рамки приложения
         self.color_dialog.exec_()
         self.palette.setColor(QPalette.Window, self.color)
         self.setPalette(self.palette)
 
-    def app_color(self):
+    def app_color(self): #изменение цвета темы
         self.color_dialog.exec_()
         self.palette.setColor(QPalette.Button, self.color)
         self.setPalette(self.palette)
 
-    def text_color(self):
+    def text_color(self): #изменение цвета текста
         self.color_dialog.exec_()
         self.palette.setColor(QPalette.WindowText, self.color)
         self.setPalette(self.palette)
@@ -103,11 +105,18 @@ class BeProductive(QMainWindow):
     def on_currentColorChanged(self, color):
         self.color = color
 
-    def add_task(self):
+    def add_task(self): #добавление задачи
         if self.Enter_Task != "":
             self.List_Task.addItem(self.Enter_Task.text())
+        self.Enter_Task.setText("")
 
-    def save_changes(self):
+    def del_cur_task(self): #удаление текущей задачи
+        self.List_Task.takeItem(0)
+
+    def clear_list(self): #очистка списка задач
+        self.List_Task.clear()
+
+    def save_changes(self): #сохранение изменений
         self.pomo_minutes = int(self.Pomo_Slider.value())
         self.Pomo_LCD.display(f"{self.pomo_minutes}:00")
         self.short_minutes = int(self.Short_Slider.value())
@@ -118,7 +127,7 @@ class BeProductive(QMainWindow):
         self.short_flag = True
         self.long_flag = True
 
-    def show_Pomo(self):
+    def show_Pomo(self): #таймер Pomodoro
         m, s = divmod(self.pomo_seconds, 60)
         self.min_sec_format = '{:02d}:{:02d}'.format(m, s)
         self.Pomo_LCD.display(self.min_sec_format)
@@ -135,7 +144,7 @@ class BeProductive(QMainWindow):
             self.pomo_seconds = 0
             self.pomo_flag = True
 
-    def pomodoro_timer_on_off(self):
+    def pomodoro_timer_on_off(self): #обработка остановки / повторного запуска таймера Pomodoro
         if self.pomo_flag:
             self.pomo_seconds = 60 * self.pomo_minutes
             self.pomo_flag = False
@@ -146,7 +155,7 @@ class BeProductive(QMainWindow):
             self.pomo_timer.stop()
             self.Pomo_Start.setText("Продолжить фокусировку")
 
-    def show_Short(self):
+    def show_Short(self): #таймер короткого перерыва
         m, s = divmod(self.short_seconds, 60)
         self.min_sec_format = '{:02d}:{:02d}'.format(m, s)
         self.Short_LCD.display(self.min_sec_format)
@@ -157,7 +166,7 @@ class BeProductive(QMainWindow):
             self.short_seconds = 0
             self.short_flag = True
 
-    def short_timer_on_off(self):
+    def short_timer_on_off(self): #обработка остановки / повторного запуска таймера короткого перерыва
         if self.short_flag:
             self.short_seconds = 60 * self.short_minutes
             self.short_flag = False
@@ -168,7 +177,7 @@ class BeProductive(QMainWindow):
             self.short_timer.stop()
             self.Short_Start.setText("Продолжить перерыв")
 
-    def show_Long(self):
+    def show_Long(self): #таймер длинного перерыва
         m, s = divmod(self.long_seconds, 60)
         self.min_sec_format = '{:02d}:{:02d}'.format(m, s)
         self.Long_LCD.display(self.min_sec_format)
@@ -179,7 +188,7 @@ class BeProductive(QMainWindow):
             self.long_seconds = 0
             self.long_flag = True
 
-    def long_timer_on_off(self):
+    def long_timer_on_off(self): #обработка остановки / повторного запуска таймера длинного перерыва
         if self.long_flag:
             self.long_seconds = 60 * self.long_minutes
             self.long_flag = False
@@ -190,38 +199,38 @@ class BeProductive(QMainWindow):
             self.long_timer.stop()
             self.Long_Start.setText("Продолжить перерыв")
 
-    def Pomodoro_Reset(self):
+    def Pomodoro_Reset(self): #обработка сброса таймера Pomodoro
         self.pomo_timer.stop()
         self.Pomo_Start.setText("Начать фокусировку")
         self.Pomo_LCD.display(f"{self.pomo_minutes}:00")
         self.pomo_flag = True
 
-    def Short_Reset(self):
+    def Short_Reset(self): #обработка сброса таймера короткого перерыва
         self.short_timer.stop()
         self.Short_Start.setText("Начать перерыв")
         self.Short_LCD.display(f"0{self.short_minutes}:00")
         self.short_flag = True
 
-    def Long_Reset(self):
+    def Long_Reset(self): #обработка сброса таймера длинного перерыва
         self.long_timer.stop()
         self.Long_Start.setText("Начать перерыв")
         self.Long_LCD.display(f"{self.long_minutes}:00")
         self.long_flag = True
 
-    def reset_all_timers(self):
+    def reset_all_timers(self): #перезапуск всех таймеров
         self.Pomodoro_Reset()
         self.Short_Reset()
         self.Long_Reset()
 
-    def ref_to_reg(self):
+    def ref_to_reg(self): #переключение между окнами входа и регистрации
         self.to_reg.clicked.connect(lambda: self.log_cont.hide())
         self.to_reg.clicked.connect(lambda: self.reg_cont.show())
 
-    def ref_to_log(self):
+    def ref_to_log(self): #переключение между окнами регистрации и входа
         self.to_log.clicked.connect(lambda: self.reg_cont.hide())
         self.to_log.clicked.connect(lambda: self.log_cont.show())
 
-    def __reg(self):
+    def __reg(self): #регистрация пользователя
         login = ui.login_reg.text()
         psw1 = ui.psw_fr_reg.text()
         psw2 = ui.psw_sc_reg.text()
@@ -249,7 +258,7 @@ class BeProductive(QMainWindow):
             else:
                 ui.err_msg_reg4.setText("Пароли должны совпадать")
 
-    def __log(self):
+    def __log(self): #вход пользователя в свой профиль
         login = ui.login_log.text()
         psw = ui.psw_log.text()
         res = log(login, psw)
@@ -268,7 +277,7 @@ class BeProductive(QMainWindow):
         else:
             ui.err_msg_log.setText(res["msg"])
 
-    def __clear_log_reg(self):
+    def __clear_log_reg(self): #очистка окон регистрации и входа
         ui.login_log.setText("")
         ui.psw_log.setText("")
         ui.login_reg.setText("")
@@ -281,7 +290,7 @@ class BeProductive(QMainWindow):
         ui.err_msg_reg3.setText("")
         ui.err_msg_reg4.setText("")
 
-    def __leave_profile(self):
+    def __leave_profile(self): #обработка выхода пользователя из профиля
         self.__clear_log_reg()
         self.session.pop("id")
         self.reset_all_timers()
@@ -290,7 +299,7 @@ class BeProductive(QMainWindow):
         ui.log_cont.show()
         self.log_flag = False
 
-    def __del_profile(self):
+    def __del_profile(self): #обработка удаления пользователем своего профиля
         psw, ok = QtWidgets.QInputDialog.getText(
             ui,
             "Внимание!",
