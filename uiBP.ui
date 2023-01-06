@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1646</width>
-    <height>825</height>
+    <width>1400</width>
+    <height>700</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="font">
    <font>
@@ -20,11 +26,12 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">.QMainWindow {
-background-color: rgb(186, 73, 73);
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -34,13 +41,13 @@ background-color: rgb(186, 73, 73);
          <bool>true</bool>
         </property>
         <property name="autoFillBackground">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="main">
          <attribute name="title">
@@ -71,6 +78,9 @@ background-color: rgb(186, 73, 73);
                 <weight>50</weight>
                 <bold>false</bold>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
               <property name="currentIndex">
                <number>1</number>
@@ -570,26 +580,8 @@ background-color: rgb(186, 73, 73);
            </item>
            <item>
             <layout class="QFormLayout" name="formLayout_4">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_8">
-               <property name="minimumSize">
-                <size>
-                 <width>600</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>17</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Цвет рамки приложения: </string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="Frame_color">
                <property name="font">
                 <font>
                  <pointsize>13</pointsize>
@@ -608,12 +600,12 @@ background-color: rgb(186, 73, 73);
                 </font>
                </property>
                <property name="text">
-                <string>...</string>
+                <string>Цвет темы:</string>
                </property>
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QPushButton" name="pushButton_4">
+              <widget class="QPushButton" name="App_color">
                <property name="font">
                 <font>
                  <pointsize>13</pointsize>
@@ -632,12 +624,12 @@ background-color: rgb(186, 73, 73);
                 </font>
                </property>
                <property name="text">
-                <string>...</string>
+                <string>Цвет текста:</string>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QPushButton" name="pushButton_5">
+              <widget class="QPushButton" name="Text_color">
                <property name="font">
                 <font>
                  <pointsize>13</pointsize>
@@ -645,6 +637,33 @@ background-color: rgb(186, 73, 73);
                </property>
                <property name="text">
                 <string>Настроить</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="Color_Frame_Text">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>600</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>17</pointsize>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="text">
+                <string>Цвет рамки: </string>
                </property>
               </widget>
              </item>
@@ -672,6 +691,9 @@ background-color: rgb(186, 73, 73);
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
             <widget class="QWidget" name="account" native="true">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <widget class="QLabel" name="label_2">
               <property name="geometry">
                <rect>
@@ -1124,31 +1146,40 @@ color: red;</string>
          </widget>
         </widget>
         <widget class="QWidget" name="Info">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <attribute name="title">
           <string>О приложении</string>
          </attribute>
          <widget class="QTextEdit" name="textEdit">
           <property name="geometry">
            <rect>
-            <x>160</x>
-            <y>70</y>
-            <width>1131</width>
-            <height>691</height>
+            <x>120</x>
+            <y>90</y>
+            <width>1161</width>
+            <height>451</height>
            </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
           </property>
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:18pt; font-weight:600; color:#541c1f;&quot;&gt;Что такое «Be Productive»?&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:13.5pt; color:#785e60;&quot;&gt;«Be Productive» — это менеджер задач с настраиваемым таймером Pomodoro. Он станет отличным помощником в борьбе с прокрастинацией, помогая Вам сфокусироваться на Вашей работе. Данное приложение создано с использованием техники Pomodoro, которая представляет собой особый метод тайм-менеджмента, разработанный Франческо Чирилло.&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:18pt; font-weight:600; color:#541c1f;&quot;&gt;Что из себя представляет метод Pomodoro?&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:13.5pt; color:#785e60;&quot;&gt;Метод Pomodoro создан Франческо Чирилло для более продуктивной организации работы и учебы. В данной технике используется таймер для разбивки работы на интервалы (обычно по 25 минут), между которыми должны быть короткие перерывы. Каждый интервал известен как pomodoro, от итальянского слова «помидор», в честь кухонного таймера в форме помидора, который Франческо использовал во время учебы в университете.&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:18pt; font-weight:600; color:#541c1f;&quot;&gt;Как работать с приложением?&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:13.5pt; color:#785e60;&quot;&gt;Зайдите в раздел «Cписок задач» для записи ближайших задач, он нужен, чтобы Вы видели общую картину предстоящей работы и не забыли ни об одной задаче.&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:13.5pt; color:#785e60;&quot;&gt;Далее нажмите на вкладку «Главная», где находятся 3 таймера:&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:13.5pt; color:#785e60;&quot;&gt;для фокусировки, короткого и длинного перерывов.&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif'; font-size:13.5pt; color:#785e60;&quot;&gt;Если необходимо настроить время таймеров под себя, то зайдите на вкладку «Настройки», где можно установить время таймера в минутах.&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; font-weight:600; color:#541c1f;&quot;&gt;Что такое «Be Productive»?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;«Be Productive» — это менеджер задач с настраиваемым таймером Pomodoro. Он станет отличным помощником в борьбе с прокрастинацией, помогая Вам сфокусироваться на Вашей работе. Данное приложение создано с использованием техники Pomodoro, которая представляет собой особый метод тайм-менеджмента, разработанный Франческо Чирилло.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; font-weight:600; color:#541c1f;&quot;&gt;Что из себя представляет метод Pomodoro?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Метод Pomodoro создан Франческо Чирилло для более продуктивной организации работы и учебы. В данной технике используется таймер для разбивки работы на интервалы (обычно по 25 минут), между которыми должны быть короткие перерывы. Каждый интервал известен как pomodoro, от итальянского слова «помидор», в честь кухонного таймера в форме помидора, который Франческо использовал во время учебы в университете.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; font-weight:600; color:#541c1f;&quot;&gt;Как работать с приложением?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Войдите в свой аккаунт, чтобы отслеживать свой прогресс: после входа в Ваш аккаунт Вам будет доступно общее число часов фокусировки и место в рейтинге среди всех пользователей приложения по количеству часов фокусировки.&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Зайдите в раздел «Cписок задач» для записи ближайших задач, он нужен, чтобы Вы видели общую картину предстоящей работы и не забыли ни об одной задаче.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Далее нажмите на вкладку «Главная», где находятся 3 таймера:&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;для фокусировки, короткого и длинного перерывов.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Если необходимо настроить время таймеров под себя, то зайдите на вкладку «Настройки», где можно установить время таймера в минутах.&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Также в этом разделе можно поменять цвет темы, цвет рамки и цвет текста приложения.&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </widget>
