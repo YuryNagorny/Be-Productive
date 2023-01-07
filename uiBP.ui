@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1400</width>
-    <height>700</height>
+    <height>800</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,11 +34,16 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
+     <layout class="QVBoxLayout" name="MainLayout">
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="enabled">
          <bool>true</bool>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+         </font>
         </property>
         <property name="autoFillBackground">
          <bool>false</bool>
@@ -47,7 +52,7 @@
          <string notr="true"/>
         </property>
         <property name="currentIndex">
-         <number>4</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="main">
          <attribute name="title">
@@ -55,7 +60,7 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
+           <layout class="QVBoxLayout" name="WindowLayout">
             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
              <widget class="QTabWidget" name="Timer">
               <property name="enabled">
@@ -83,7 +88,7 @@
                <string notr="true"/>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>2</number>
               </property>
               <widget class="QWidget" name="PomoBTN">
                <attribute name="title">
@@ -105,10 +110,10 @@
                   <x>0</x>
                   <y>210</y>
                   <width>391</width>
-                  <height>65</height>
+                  <height>71</height>
                  </rect>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_13">
+                <layout class="QVBoxLayout" name="Pomo_Layout">
                  <item>
                   <widget class="QPushButton" name="Pomo_Start">
                    <property name="sizePolicy">
@@ -170,10 +175,10 @@
                   <x>0</x>
                   <y>210</y>
                   <width>391</width>
-                  <height>65</height>
+                  <height>71</height>
                  </rect>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_11">
+                <layout class="QVBoxLayout" name="Short_Layout">
                  <item>
                   <widget class="QPushButton" name="Short_Start">
                    <property name="sizePolicy">
@@ -235,10 +240,10 @@
                   <x>0</x>
                   <y>210</y>
                   <width>391</width>
-                  <height>65</height>
+                  <height>71</height>
                  </rect>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_12">
+                <layout class="QVBoxLayout" name="Long_Layout">
                  <item>
                   <widget class="QPushButton" name="Long_Start">
                    <property name="sizePolicy">
@@ -290,52 +295,18 @@
          <attribute name="title">
           <string>Список задач</string>
          </attribute>
-         <widget class="QWidget" name="formLayoutWidget_2">
+         <widget class="QWidget" name="formLayoutWidget">
           <property name="geometry">
            <rect>
-            <x>70</x>
-            <y>50</y>
-            <width>891</width>
-            <height>291</height>
+            <x>220</x>
+            <y>90</y>
+            <width>551</width>
+            <height>271</height>
            </rect>
           </property>
-          <layout class="QFormLayout" name="formLayout_5">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Напишите Ваши задачи на ближайшее время:</string>
-             </property>
-            </widget>
-           </item>
+          <layout class="QFormLayout" name="formLayout">
            <item row="0" column="1">
-            <widget class="QLineEdit" name="Enter_Task">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="Text_List2">
              <property name="font">
               <font>
                <pointsize>13</pointsize>
@@ -346,15 +317,54 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="1" column="1">
             <widget class="QListWidget" name="List_Task"/>
            </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="Add_Task">
-             <property name="text">
-              <string>Добавить задачу</string>
-             </property>
-            </widget>
+           <item row="1" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QPushButton" name="Add_Task">
+               <property name="text">
+                <string>Добавить задачу</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Edit_Task">
+               <property name="text">
+                <string>Редактировать задачу</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Del_Cur_Task">
+               <property name="text">
+                <string>Удалить выбранную задачу</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Make_Up">
+               <property name="text">
+                <string>Сделать выше в списке</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Make_Down">
+               <property name="text">
+                <string>Сделать ниже в списке</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Clear_List">
+               <property name="text">
+                <string>Очистить список задач</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
@@ -372,9 +382,9 @@
             <height>221</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
+          <layout class="QVBoxLayout" name="Time_Set_Layout">
            <item>
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="Text_Time_Set">
              <property name="font">
               <font>
                <pointsize>17</pointsize>
@@ -386,9 +396,46 @@
             </widget>
            </item>
            <item>
-            <layout class="QFormLayout" name="formLayout">
+            <layout class="QFormLayout" name="Time_Text_Layout">
+             <item row="0" column="1">
+              <layout class="QVBoxLayout" name="Time_Text_Layout2">
+               <property name="sizeConstraint">
+                <enum>QLayout::SetDefaultConstraint</enum>
+               </property>
+               <item>
+                <widget class="QLCDNumber" name="Pomo_LCD_Set">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Short_LCD_Set">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Long_LCD_Set">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item row="0" column="0">
-              <layout class="QFormLayout" name="formLayout_3">
+              <layout class="QFormLayout" name="Time_Text_Layout3">
                <item row="2" column="0">
                 <widget class="QLabel" name="Short_Label_Set">
                  <property name="sizePolicy">
@@ -496,43 +543,6 @@
                </item>
               </layout>
              </item>
-             <item row="0" column="1">
-              <layout class="QVBoxLayout" name="verticalLayout_6">
-               <property name="sizeConstraint">
-                <enum>QLayout::SetDefaultConstraint</enum>
-               </property>
-               <item>
-                <widget class="QLCDNumber" name="Pomo_LCD_Set">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLCDNumber" name="Short_LCD_Set">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLCDNumber" name="Long_LCD_Set">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
             </layout>
            </item>
            <item>
@@ -545,6 +555,7 @@
              </property>
              <property name="font">
               <font>
+               <pointsize>11</pointsize>
                <weight>50</weight>
                <bold>false</bold>
               </font>
@@ -561,11 +572,11 @@
            <rect>
             <x>190</x>
             <y>350</y>
-            <width>761</width>
+            <width>775</width>
             <height>231</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_10">
+          <layout class="QVBoxLayout" name="Color_Set">
            <item>
             <widget class="QLabel" name="label_7">
              <property name="font">
@@ -579,9 +590,15 @@
             </widget>
            </item>
            <item>
-            <layout class="QFormLayout" name="formLayout_4">
+            <layout class="QFormLayout" name="Color_Set_Layout">
              <item row="0" column="1">
               <widget class="QPushButton" name="Frame_color">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>13</pointsize>
@@ -590,10 +607,22 @@
                <property name="text">
                 <string>Настроить</string>
                </property>
+               <property name="autoRepeatDelay">
+                <number>300</number>
+               </property>
+               <property name="autoDefault">
+                <bool>false</bool>
+               </property>
+               <property name="default">
+                <bool>false</bool>
+               </property>
+               <property name="flat">
+                <bool>false</bool>
+               </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_11">
+              <widget class="QLabel" name="Text_App">
                <property name="font">
                 <font>
                  <pointsize>17</pointsize>
@@ -606,6 +635,12 @@
              </item>
              <item row="1" column="1">
               <widget class="QPushButton" name="App_color">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>13</pointsize>
@@ -617,7 +652,7 @@
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="label_12">
+              <widget class="QLabel" name="Text_Text">
                <property name="font">
                 <font>
                  <pointsize>17</pointsize>
@@ -630,6 +665,12 @@
              </item>
              <item row="2" column="1">
               <widget class="QPushButton" name="Text_color">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>13</pointsize>
@@ -643,15 +684,21 @@
              <item row="0" column="0">
               <widget class="QLabel" name="Color_Frame_Text">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>600</width>
+                 <width>0</width>
                  <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -694,7 +741,7 @@
              <property name="styleSheet">
               <string notr="true"/>
              </property>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="UserMan">
               <property name="geometry">
                <rect>
                 <x>20</x>
@@ -713,9 +760,9 @@
              <widget class="QWidget" name="formLayoutWidget_3">
               <property name="geometry">
                <rect>
-                <x>490</x>
-                <y>110</y>
-                <width>841</width>
+                <x>440</x>
+                <y>140</y>
+                <width>981</width>
                 <height>121</height>
                </rect>
               </property>
@@ -729,7 +776,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>Место в рейтинге по количеству минут фокусировки:</string>
+                  <string>Место в рейтинге по количеству часов фокусировки:</string>
                  </property>
                 </widget>
                </item>
@@ -768,7 +815,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>Число минут фокусировки за все время:</string>
+                  <string>Число часов фокусировки за все время:</string>
                  </property>
                 </widget>
                </item>
@@ -783,7 +830,7 @@
                 <height>91</height>
                </rect>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_2">
+              <layout class="QVBoxLayout" name="Button_Group">
                <item>
                 <widget class="QPushButton" name="Log_Out">
                  <property name="text">
@@ -803,7 +850,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="reg_cont" native="true">
+            <widget class="QWidget" name="reg_window" native="true">
              <property name="maximumSize">
               <size>
                <width>400</width>
@@ -824,7 +871,7 @@ QLineEdit {
 	font-size: 15px;
 }</string>
              </property>
-             <widget class="QLabel" name="headling_reg">
+             <widget class="QLabel" name="reg_title">
               <property name="geometry">
                <rect>
                 <x>140</x>
@@ -857,7 +904,7 @@ font-size: 20px;</string>
                <string>Логин</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="psw_sc_reg">
+             <widget class="QLineEdit" name="password2">
               <property name="geometry">
                <rect>
                 <x>40</x>
@@ -892,7 +939,7 @@ font-size: 20px;</string>
                <string>Войти</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="to_log">
+             <widget class="QPushButton" name="to_log_btn">
               <property name="geometry">
                <rect>
                 <x>100</x>
@@ -917,7 +964,7 @@ QPushButton:hover {
                <string>Уже есть аккаунт? Войти</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="psw_fr_reg">
+             <widget class="QLineEdit" name="password1">
               <property name="geometry">
                <rect>
                 <x>40</x>
@@ -933,7 +980,7 @@ QPushButton:hover {
                <string>Пароль</string>
               </property>
              </widget>
-             <widget class="QLabel" name="err_msg_reg2">
+             <widget class="QLabel" name="error_reg2">
               <property name="geometry">
                <rect>
                 <x>40</x>
@@ -951,7 +998,7 @@ color: red;</string>
                <string/>
               </property>
              </widget>
-             <widget class="QLabel" name="err_msg_reg3">
+             <widget class="QLabel" name="error_reg3">
               <property name="geometry">
                <rect>
                 <x>50</x>
@@ -969,7 +1016,7 @@ color: red;</string>
                <string/>
               </property>
              </widget>
-             <widget class="QLabel" name="err_msg_reg4">
+             <widget class="QLabel" name="error_reg4">
               <property name="geometry">
                <rect>
                 <x>100</x>
@@ -987,7 +1034,7 @@ color: red;</string>
                <string/>
               </property>
              </widget>
-             <widget class="QLabel" name="err_msg_reg1">
+             <widget class="QLabel" name="error_reg1">
               <property name="geometry">
                <rect>
                 <x>130</x>
@@ -1008,7 +1055,7 @@ color: red;</string>
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="log_cont" native="true">
+            <widget class="QWidget" name="log_window" native="true">
              <property name="maximumSize">
               <size>
                <width>400</width>
@@ -1029,7 +1076,7 @@ QLineEdit {
 	font-size: 15px;
 }</string>
              </property>
-             <widget class="QLabel" name="headling_log">
+             <widget class="QLabel" name="log_title">
               <property name="geometry">
                <rect>
                 <x>180</x>
@@ -1062,7 +1109,7 @@ font-size: 20px;</string>
                <string>Логин</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="psw_log">
+             <widget class="QLineEdit" name="password_log">
               <property name="geometry">
                <rect>
                 <x>50</x>
@@ -1097,7 +1144,7 @@ font-size: 20px;</string>
                <string>Войти</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="to_reg">
+             <widget class="QPushButton" name="to_reg_btn">
               <property name="geometry">
                <rect>
                 <x>80</x>
@@ -1122,7 +1169,7 @@ QPushButton:hover {
                <string>Нет аккаутна? Зарегистрироваться</string>
               </property>
              </widget>
-             <widget class="QLabel" name="err_msg_log">
+             <widget class="QLabel" name="error_log">
               <property name="geometry">
                <rect>
                 <x>40</x>
@@ -1152,13 +1199,13 @@ color: red;</string>
          <attribute name="title">
           <string>О приложении</string>
          </attribute>
-         <widget class="QTextEdit" name="textEdit">
+         <widget class="QTextEdit" name="Describtion">
           <property name="geometry">
            <rect>
             <x>120</x>
             <y>90</y>
             <width>1161</width>
-            <height>451</height>
+            <height>581</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -1168,18 +1215,19 @@ color: red;</string>
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; font-weight:600; color:#541c1f;&quot;&gt;Что такое «Be Productive»?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;«Be Productive» — это менеджер задач с настраиваемым таймером Pomodoro. Он станет отличным помощником в борьбе с прокрастинацией, помогая Вам сфокусироваться на Вашей работе. Данное приложение создано с использованием техники Pomodoro, которая представляет собой особый метод тайм-менеджмента, разработанный Франческо Чирилло.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; font-weight:600; color:#541c1f;&quot;&gt;Что из себя представляет метод Pomodoro?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Метод Pomodoro создан Франческо Чирилло для более продуктивной организации работы и учебы. В данной технике используется таймер для разбивки работы на интервалы (обычно по 25 минут), между которыми должны быть короткие перерывы. Каждый интервал известен как pomodoro, от итальянского слова «помидор», в честь кухонного таймера в форме помидора, который Франческо использовал во время учебы в университете.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; font-weight:600; color:#541c1f;&quot;&gt;Как работать с приложением?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Войдите в свой аккаунт, чтобы отслеживать свой прогресс: после входа в Ваш аккаунт Вам будет доступно общее число часов фокусировки и место в рейтинге среди всех пользователей приложения по количеству часов фокусировки.&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Зайдите в раздел «Cписок задач» для записи ближайших задач, он нужен, чтобы Вы видели общую картину предстоящей работы и не забыли ни об одной задаче.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Далее нажмите на вкладку «Главная», где находятся 3 таймера:&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;для фокусировки, короткого и длинного перерывов.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Если необходимо настроить время таймеров под себя, то зайдите на вкладку «Настройки», где можно установить время таймера в минутах.&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:10pt; color:#785e60;&quot;&gt;Также в этом разделе можно поменять цвет темы, цвет рамки и цвет текста приложения.&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; font-weight:600; color:#541c1f;&quot;&gt;Что такое «Be Productive»?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; color:#785e60;&quot;&gt;«Be Productive» — это менеджер задач с настраиваемым таймером Pomodoro. Он станет отличным помощником в борьбе с прокрастинацией, помогая Вам сфокусироваться на Вашей работе. Данное приложение создано с использованием техники Pomodoro, которая представляет собой особый метод тайм-менеджмента, разработанный Франческо Чирилло.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; font-weight:600; color:#541c1f;&quot;&gt;Что из себя представляет метод Pomodoro?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; color:#785e60;&quot;&gt;Метод Pomodoro создан Франческо Чирилло для более продуктивной организации работы и учебы. В данной технике используется таймер для разбивки работы на интервалы (обычно по 25 минут), между которыми должны быть короткие перерывы. Каждый интервал известен как pomodoro, от итальянского слова «помидор», в честь кухонного таймера в форме помидора, который Франческо использовал во время учебы в университете.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; font-weight:600; color:#541c1f;&quot;&gt;Как работать с приложением?&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; color:#785e60;&quot;&gt;Войдите в свой аккаунт, чтобы отслеживать свой прогресс: после входа в Ваш аккаунт Вам будет доступно общее число часов фокусировки и место в рейтинге среди всех пользователей приложения по количеству часов фокусировки.&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; color:#785e60;&quot;&gt;Зайдите в раздел «Cписок задач» для записи ближайших задач, он нужен, чтобы Вы видели общую картину предстоящей работы и не забыли ни об одной задаче.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; color:#785e60;&quot;&gt;Далее нажмите на вкладку «Главная», где находятся 3 таймера:&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; color:#785e60;&quot;&gt;для фокусировки, короткого и длинного перерывов.&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2,sans-serif'; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; color:#785e60;&quot;&gt;Если необходимо настроить время таймеров под себя, то зайдите на вкладку «Настройки», где можно установить время таймера в минутах.&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI,sans-serif,serif'; font-size:12pt; color:#785e60;&quot;&gt;Также в этом разделе можно поменять цвет темы, цвет рамки и цвет текста приложения.&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </widget>

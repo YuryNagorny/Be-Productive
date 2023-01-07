@@ -3,7 +3,8 @@ import sqlite3
 
 db = sqlite3.connect("dbBP.db")
 
-def reg(login, psw):
+
+def reg(login, password):
     ''' Эта функция добавляет в таблицу usersBP пользователей '''
     db.row_factory = sqlite3.Row
     cur = db.cursor()
@@ -20,7 +21,7 @@ def reg(login, psw):
                 INSERT INTO `usersBP`(`login`, `password`)
                 VALUES (
                     '{login}',
-                    '{generate_password_hash(psw)}'
+                    '{generate_password_hash(password)}'
                 )
             '''
         )
@@ -28,7 +29,7 @@ def reg(login, psw):
         return {
             "msg": "Вы успешно зарегистрировались!",
             "status": True,
-            "id": get_user_id(login)["id"]
+            "id": return_user_id(login)["id"]
         }
     return {
         "msg": "Такой логин занят!",
@@ -36,7 +37,7 @@ def reg(login, psw):
     }
 
 
-def get_user_id(login):
+def return_user_id(login):
     ''' Эта функция возвращает id '''
     db.row_factory = sqlite3.Row
     cur = db.cursor()
@@ -52,9 +53,7 @@ def get_user_id(login):
     }
 
 
-# get user id надо для self.session!!!! Удалять нельзя
-
-def log(login, psw):
+def log(login, password):
     ''' Эта функция логинит юзера '''
     db.row_factory = sqlite3.Row
     cur = db.cursor()
@@ -68,7 +67,7 @@ def log(login, psw):
     for row in res:
         if row["login"] == login and check_password_hash(
                 row['password'],
-                psw
+                password
         ):
             return {
                 "msg": "Вы успешно вошли",
@@ -77,13 +76,13 @@ def log(login, psw):
             }
     else:
         return {
-            "msg": "Неверный логин/пароль!",
+            "msg": "Неверный логин или пароль!",
             "status": False
         }
 
 
-def chek_psw(user_id, psw):
-    ''' Эта функция проверяет пароли '''
+def check_password(user_id, password):
+    ''' Эта функция проверяет ввод паролей на совпадение '''
     db.row_factory = sqlite3.Row
     cur = db.cursor()
     cur.execute(
@@ -96,7 +95,7 @@ def chek_psw(user_id, psw):
     for row in res:
         if row["id"] == int(user_id) and check_password_hash(
                 row["password"],
-                psw
+                password
         ):
             return {
                 "msg": "Пароли совпали",
@@ -110,7 +109,7 @@ def chek_psw(user_id, psw):
 
 
 def del_profile(user_id):
-    ''' Эта функция удаляет профиль юзера '''
+    ''' Эта функция удаляет профиль пользователя '''
     db.row_factory = sqlite3.Row
     cur = db.cursor()
     cur.execute(
@@ -136,6 +135,7 @@ def count_seconds(user_id):
     )
     db.commit()
 
+
 def return_seconds(user_id):
     """Эта функция возвращает количество секунд"""
     db.row_factory = sqlite3.Row
@@ -150,6 +150,7 @@ def return_seconds(user_id):
     return {
         "seconds": id_sec[0][0]
     }
+
 
 def return_place(user_id):
     """Эта функция сортирует пользователей по количеству секунд фокусировки"""

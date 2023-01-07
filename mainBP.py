@@ -1,7 +1,7 @@
 import sys
 import traceback
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QInputDialog, QMessageBox, QLineEdit
 from PyQt5.QtCore import QTimer
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import *
@@ -66,13 +66,10 @@ class BeProductive(QMainWindow):
         self.Reset_Pomo.clicked.connect(lambda: self.Pomodoro_Reset())
         self.Reset_Short.clicked.connect(lambda: self.Short_Reset())
         self.Reset_Long.clicked.connect(lambda: self.Long_Reset())
-        self.Add_Task.clicked.connect(lambda: self.add_task())
-        self.Del_Cur_Task.clicked.connect(lambda: self.del_cur_task())
-        self.Clear_List.clicked.connect(lambda: self.clear_list())
         self.Log_Out.clicked.connect(self.__leave_profile)
         self.Del_Profile.clicked.connect(self.__del_profile)
         self.account.hide()
-        self.reg_cont.hide()
+        self.reg_window.hide()
         self.log_flag = False
         self.Frame_color.clicked.connect(self.frame_color)
         self.App_color.clicked.connect(self.app_color)
@@ -85,6 +82,57 @@ class BeProductive(QMainWindow):
         self.color_dialog = QtWidgets.QColorDialog(self)
         self.color_dialog.currentColorChanged.connect(self.on_currentColorChanged)
         self.color = QColor(186, 73, 73)
+        self.Add_Task.clicked.connect(self.add_task)
+        self.Edit_Task.clicked.connect(self.edit_task)
+        self.Del_Cur_Task.clicked.connect(self.remove_task)
+        self.Clear_List.clicked.connect(lambda: self.clear_list())
+        self.Make_Up.clicked.connect(lambda: self.up_task())
+        self.Make_Down.clicked.connect(lambda: self.down_task())
+
+    def add_task(self):
+        currentIndex = self.List_Task.currentRow()
+        text, ok = QInputDialog.getText(self, "Новая задача", "Напишите название задачи:")
+        if ok and text is not None:
+            self.List_Task.insertItem(currentIndex, text)
+
+    def edit_task(self):
+        currentIndex = self.List_Task.currentRow()
+        item = self.List_Task.item(currentIndex)
+        if item is not None:
+            text, ok = QInputDialog.getText(self, "Edit Student", "Student Name", QLineEdit.Normal, item.text())
+            if text and ok is not None:
+                item.setText(text)
+
+    def remove_task(self):
+        currentIndex = self.List_Task.currentRow()
+        item = self.List_Task.item(currentIndex)
+        if item is None:
+            return
+
+        question = QMessageBox.question(self, "Удаление задачи",
+                                        "Вы точно хотите удалить задачу?" + item.text(),
+                                        QMessageBox.Yes | QMessageBox.No)
+
+        if question == QMessageBox.Yes:
+            item = self.List_Task.takeItem(currentIndex)
+            del item
+
+    def up_task(self):
+        index = self.List_Task.currentRow()
+        if index >= 1:
+            item = self.List_Task.takeItem(index)
+            self.List_Task.insertItem(index - 1, item)
+            self.List_Task.setCurrentItem(item)
+
+    def down_task(self):
+        index = self.List_Task.currentRow()
+        if index < self.List_Task.count() - 1:
+            item = self.List_Task.takeItem(index)
+            self.List_Task.insertItem(index + 1, item)
+            self.List_Task.setCurrentItem(item)
+
+    def clear_list(self): #очистка списка задач
+        self.List_Task.clear()
 
     def frame_color(self): #изменение цвета рамки приложения
         self.color_dialog.exec_()
@@ -99,22 +147,12 @@ class BeProductive(QMainWindow):
     def text_color(self): #изменение цвета текста
         self.color_dialog.exec_()
         self.palette.setColor(QPalette.WindowText, self.color)
+        self.palette.setColor(QPalette.ButtonText, self.color)
         self.setPalette(self.palette)
 
     @QtCore.pyqtSlot(QColor)
     def on_currentColorChanged(self, color):
         self.color = color
-
-    def add_task(self): #добавление задачи
-        if self.Enter_Task != "":
-            self.List_Task.addItem(self.Enter_Task.text())
-        self.Enter_Task.setText("")
-
-    def del_cur_task(self): #удаление текущей задачи
-        self.List_Task.takeItem(0)
-
-    def clear_list(self): #очистка списка задач
-        self.List_Task.clear()
 
     def save_changes(self): #сохранение изменений
         self.pomo_minutes = int(self.Pomo_Slider.value())
@@ -137,7 +175,7 @@ class BeProductive(QMainWindow):
             place_res = return_place(self.session["id"])
             sec_res = return_seconds(self.session["id"])
             self.Num_place.setText(str(place_res["place"]))
-            self.Num_total.setText(str(sec_res["seconds"]))
+            self.Num_total.setText(str(round(sec_res["seconds"] / 3600, 2)))
         if self.pomo_seconds < 0:
             self.pomo_timer.stop()
             self.Pomo_Start.setText("Начать фокусировку")
@@ -217,108 +255,107 @@ class BeProductive(QMainWindow):
         self.Long_LCD.display(f"{self.long_minutes}:00")
         self.long_flag = True
 
-    def reset_all_timers(self): #перезапуск всех таймеров
+    def reset_all_timers(self): #сброс всех таймеров
         self.Pomodoro_Reset()
         self.Short_Reset()
         self.Long_Reset()
 
-    def ref_to_reg(self): #переключение между окнами входа и регистрации
-        self.to_reg.clicked.connect(lambda: self.log_cont.hide())
-        self.to_reg.clicked.connect(lambda: self.reg_cont.show())
+    def log_to_reg(self): #переключение между окнами входа и регистрации
+        self.to_reg_btn.clicked.connect(lambda: self.log_window.hide())
+        self.to_reg_btn.clicked.connect(lambda: self.reg_window.show())
 
-    def ref_to_log(self): #переключение между окнами регистрации и входа
-        self.to_log.clicked.connect(lambda: self.reg_cont.hide())
-        self.to_log.clicked.connect(lambda: self.log_cont.show())
+    def reg_to_log(self): #переключение между окнами регистрации и входа
+        self.to_log_btn.clicked.connect(lambda: self.reg_window.hide())
+        self.to_log_btn.clicked.connect(lambda: self.log_window.show())
 
     def __reg(self): #регистрация пользователя
-        login = ui.login_reg.text()
-        psw1 = ui.psw_fr_reg.text()
-        psw2 = ui.psw_sc_reg.text()
+        login = ex.login_reg.text()
+        password1 = ex.password1.text()
+        password2 = ex.password2.text()
         if len(login) < 3:
-            ui.err_msg_reg2.setText("Длина логина должна быть больше 3-ёх")
+            ex.error_reg2.setText("Длина логина должна быть больше 3-ёх")
         else:
-            ui.err_msg_reg2.setText("")
-        if len(psw1) < 8:
-            ui.err_msg_reg3.setText("Длина пароля должна быть больше 8-ми")
+            ex.error_reg2.setText("")
+        if len(password1) < 8:
+            ex.error_reg3.setText("Длина пароля должна быть больше 8-ми")
         else:
-            ui.err_msg_reg3.setText("")
-            if psw1 == psw2:
-                ui.err_msg_reg4.setText("")
-                res = reg(login, psw1)
+            ex.error_reg3.setText("")
+            if password1 == password2:
+                ex.error_reg4.setText("")
+                res = reg(login, password1)
                 if res["status"]:
-                    ui.reg_cont.hide()
-                    ui.account.show()
+                    ex.reg_window.hide()
+                    ex.account.show()
                     self.session["id"] = res["id"]
-                    msg_box = QtWidgets.QMessageBox(ui)
+                    msg_box = QMessageBox(ex)
                     msg_box.setText(res["msg"])
                     msg_box.show()
                     self.log_flag = True
                 else:
-                    ui.err_msg_reg1.setText("Такой логин занят!")
+                    ex.error_reg1.setText("Такой логин занят!")
             else:
-                ui.err_msg_reg4.setText("Пароли должны совпадать")
+                ex.error_reg4.setText("Пароли должны совпадать!")
 
     def __log(self): #вход пользователя в свой профиль
-        login = ui.login_log.text()
-        psw = ui.psw_log.text()
-        res = log(login, psw)
+        login = ex.login_log.text()
+        password = ex.password_log.text()
+        res = log(login, password)
         if res["status"]:
             self.session["id"] = res["id"]
-            ui.log_cont.hide()
-            ui.account.show()
-            msg_box = QtWidgets.QMessageBox(ui)
+            ex.log_window.hide()
+            ex.account.show()
+            msg_box = QMessageBox(ex)
             msg_box.setText(res["msg"])
             msg_box.show()
             self.log_flag = True
             place_res = return_place(self.session["id"])
             sec_res = return_seconds(self.session["id"])
             self.Num_place.setText(str(place_res["place"]))
-            self.Num_total.setText(str(sec_res["seconds"]))
+            self.Num_total.setText(str(round(sec_res["seconds"] / 3600, 2)))
         else:
-            ui.err_msg_log.setText(res["msg"])
+            ex.err_msg_log.setText(res["msg"])
 
-    def __clear_log_reg(self): #очистка окон регистрации и входа
-        ui.login_log.setText("")
-        ui.psw_log.setText("")
-        ui.login_reg.setText("")
-        ui.psw_fr_reg.setText("")
-        ui.psw_sc_reg.setText("")
-
-        ui.err_msg_log.setText("")
-        ui.err_msg_reg1.setText("")
-        ui.err_msg_reg2.setText("")
-        ui.err_msg_reg3.setText("")
-        ui.err_msg_reg4.setText("")
+    def __clear_log_and_reg(self): #очистка окон регистрации и входа
+        ex.login_log.setText("")
+        ex.password_log.setText("")
+        ex.login_reg.setText("")
+        ex.password_reg1.setText("")
+        ex.password_reg1.setText("")
+        ex.error_log.setText("")
+        ex.error_reg1.setText("")
+        ex.error_reg2.setText("")
+        ex.error_reg3.setText("")
+        ex.error_reg4.setText("")
 
     def __leave_profile(self): #обработка выхода пользователя из профиля
-        self.__clear_log_reg()
+        self.__clear_log_and_reg()
         self.session.pop("id")
         self.reset_all_timers()
-        ui.account.hide()
-        ui.reg_cont.hide()
-        ui.log_cont.show()
+        ex.account.hide()
+        ex.reg_window.hide()
+        ex.log_window.show()
         self.log_flag = False
 
     def __del_profile(self): #обработка удаления пользователем своего профиля
-        psw, ok = QtWidgets.QInputDialog.getText(
-            ui,
+        password, ok = QInputDialog.getText(
+            ex,
             "Внимание!",
             "Введите пароль:",
-            QtWidgets.QLineEdit.Password
+            QLineEdit.Password
         )
         if ok:
-            psw_res = chek_psw(self.session["id"], psw)
-            if psw_res["status"]:
+            password_res = check_password(self.session["id"], password)
+            if password_res["status"]:
                 del_res = del_profile(self.session["id"])
                 self.__leave_profile()
-                msg_box = QtWidgets.QMessageBox(ui)
+                msg_box = QtWidgets.QMessageBox(ex)
                 msg_box.setWindowTitle("Внимание!")
                 msg_box.setText(del_res["msg"])
                 msg_box.show()
                 self.reset_all_timers()
                 self.log_flag = False
             else:
-                msg_box = QtWidgets.QMessageBox(ui)
+                msg_box = QMessageBox(ex)
                 msg_box.setWindowTitle("Внимание!")
                 msg_box.setText("Неверный пароль!")
                 msg_box.show()
@@ -333,8 +370,8 @@ if __name__ == '__main__':
     sys.excepthook = excepthook
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
-    ui = BeProductive()
-    ui.ref_to_log()
-    ui.ref_to_reg()
-    ui.show()
+    ex = BeProductive()
+    ex.reg_to_log()
+    ex.log_to_reg()
+    ex.show()
     sys.exit(app.exec_())
