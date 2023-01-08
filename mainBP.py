@@ -89,13 +89,17 @@ class BeProductive(QMainWindow):
         self.Make_Up.clicked.connect(lambda: self.up_task())
         self.Make_Down.clicked.connect(lambda: self.down_task())
 
-    def add_task(self):
+    def add_task(self): #добавление задачи в список и установка CheckBox для нее
         currentIndex = self.List_Task.currentRow()
         text, ok = QInputDialog.getText(self, "Новая задача", "Напишите название задачи:")
         if ok and text is not None:
             self.List_Task.insertItem(currentIndex, text)
+            items = self.List_Task.findItems(text, QtCore.Qt.MatchExactly)
+            if len(items) > 0:
+                for item in items:
+                    item.setCheckState(QtCore.Qt.Checked)
 
-    def edit_task(self):
+    def edit_task(self): #редактирование задачи из списка (надо обязательно нажать на задачу)
         currentIndex = self.List_Task.currentRow()
         item = self.List_Task.item(currentIndex)
         if item is not None:
@@ -103,7 +107,7 @@ class BeProductive(QMainWindow):
             if text and ok is not None:
                 item.setText(text)
 
-    def remove_task(self):
+    def remove_task(self): #удаление задачи из списка
         currentIndex = self.List_Task.currentRow()
         item = self.List_Task.item(currentIndex)
         if item is None:
@@ -117,14 +121,14 @@ class BeProductive(QMainWindow):
             item = self.List_Task.takeItem(currentIndex)
             del item
 
-    def up_task(self):
+    def up_task(self): #повышение задачи в списке
         index = self.List_Task.currentRow()
         if index >= 1:
             item = self.List_Task.takeItem(index)
             self.List_Task.insertItem(index - 1, item)
             self.List_Task.setCurrentItem(item)
 
-    def down_task(self):
+    def down_task(self): #понижение задачи в списке
         index = self.List_Task.currentRow()
         if index < self.List_Task.count() - 1:
             item = self.List_Task.takeItem(index)
@@ -150,7 +154,7 @@ class BeProductive(QMainWindow):
         self.palette.setColor(QPalette.ButtonText, self.color)
         self.setPalette(self.palette)
 
-    @QtCore.pyqtSlot(QColor)
+    @QtCore.pyqtSlot(QColor) #слот для более быстрого выполнения операции
     def on_currentColorChanged(self, color):
         self.color = color
 
@@ -182,9 +186,10 @@ class BeProductive(QMainWindow):
             self.pomo_seconds = 0
             self.pomo_flag = True
 
-    def pomodoro_timer_on_off(self): #обработка остановки / повторного запуска таймера Pomodoro
+    @QtCore.pyqtSlot(bool) #слот для более быстрого выполнения операции
+    def pomodoro_timer_on_off(self): #обработка старта / остановки / повторного запуска таймера Pomodoro
         if self.pomo_flag:
-            self.pomo_seconds = 60 * self.pomo_minutes
+            self.pomo_seconds = 60 * self.pomo_minutes - 1
             self.pomo_flag = False
         if self.Pomo_Start.text() == "Начать фокусировку" or self.Pomo_Start.text() == "Продолжить фокусировку":
             self.pomo_timer.start()
@@ -204,9 +209,10 @@ class BeProductive(QMainWindow):
             self.short_seconds = 0
             self.short_flag = True
 
-    def short_timer_on_off(self): #обработка остановки / повторного запуска таймера короткого перерыва
+    @QtCore.pyqtSlot(bool) #слот для более быстрого выполнения операции
+    def short_timer_on_off(self): #обработка старта / остановки / повторного запуска таймера короткого перерыва
         if self.short_flag:
-            self.short_seconds = 60 * self.short_minutes
+            self.short_seconds = 60 * self.short_minutes - 1
             self.short_flag = False
         if self.Short_Start.text() == "Начать перерыв" or self.Short_Start.text() == "Продолжить перерыв":
             self.short_timer.start()
@@ -226,9 +232,10 @@ class BeProductive(QMainWindow):
             self.long_seconds = 0
             self.long_flag = True
 
-    def long_timer_on_off(self): #обработка остановки / повторного запуска таймера длинного перерыва
+    @QtCore.pyqtSlot(bool) #слот для более быстрого выполнения операции
+    def long_timer_on_off(self): #обработка старта / остановки / повторного запуска таймера длинного перерыва
         if self.long_flag:
-            self.long_seconds = 60 * self.long_minutes
+            self.long_seconds = 60 * self.long_minutes - 1
             self.long_flag = False
         if self.Long_Start.text() == "Начать перерыв" or self.Long_Start.text() == "Продолжить перерыв":
             self.long_timer.start()
@@ -290,6 +297,11 @@ class BeProductive(QMainWindow):
                     msg_box = QMessageBox(ex)
                     msg_box.setText(res["msg"])
                     msg_box.show()
+                    self.Greeting.setText(f'Доброго времени суток, {login}!')
+                    place_res = return_place(self.session["id"])
+                    sec_res = return_seconds(self.session["id"])
+                    self.Num_place.setText(str(place_res["place"]))
+                    self.Num_total.setText(str(round(sec_res["seconds"] / 3600, 2)))
                     self.log_flag = True
                 else:
                     ex.error_reg1.setText("Такой логин занят!")
@@ -310,6 +322,7 @@ class BeProductive(QMainWindow):
             self.log_flag = True
             place_res = return_place(self.session["id"])
             sec_res = return_seconds(self.session["id"])
+            self.Greeting.setText(f'Доброго времени суток, {login}!')
             self.Num_place.setText(str(place_res["place"]))
             self.Num_total.setText(str(round(sec_res["seconds"] / 3600, 2)))
         else:
@@ -319,8 +332,8 @@ class BeProductive(QMainWindow):
         ex.login_log.setText("")
         ex.password_log.setText("")
         ex.login_reg.setText("")
-        ex.password_reg1.setText("")
-        ex.password_reg1.setText("")
+        ex.password1.setText("")
+        ex.password2.setText("")
         ex.error_log.setText("")
         ex.error_reg1.setText("")
         ex.error_reg2.setText("")

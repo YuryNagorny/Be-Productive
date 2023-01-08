@@ -52,7 +52,7 @@
          <string notr="true"/>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="main">
          <attribute name="title">
@@ -88,7 +88,7 @@
                <string notr="true"/>
               </property>
               <property name="currentIndex">
-               <number>2</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="PomoBTN">
                <attribute name="title">
@@ -298,13 +298,16 @@
          <widget class="QWidget" name="formLayoutWidget">
           <property name="geometry">
            <rect>
-            <x>220</x>
-            <y>90</y>
-            <width>551</width>
-            <height>271</height>
+            <x>210</x>
+            <y>80</y>
+            <width>824</width>
+            <height>511</height>
            </rect>
           </property>
           <layout class="QFormLayout" name="formLayout">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
+           </property>
            <item row="0" column="1">
             <widget class="QLabel" name="Text_List2">
              <property name="font">
@@ -318,12 +321,50 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QListWidget" name="List_Task"/>
+            <widget class="QListWidget" name="List_Task">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="spacing">
+              <number>7</number>
+             </property>
+             <property name="leftMargin">
+              <number>50</number>
+             </property>
+             <property name="topMargin">
+              <number>50</number>
+             </property>
+             <property name="rightMargin">
+              <number>50</number>
+             </property>
+             <property name="bottomMargin">
+              <number>50</number>
+             </property>
              <item>
               <widget class="QPushButton" name="Add_Task">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Добавить задачу</string>
                </property>
@@ -331,6 +372,17 @@
              </item>
              <item>
               <widget class="QPushButton" name="Edit_Task">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Редактировать задачу</string>
                </property>
@@ -338,6 +390,17 @@
              </item>
              <item>
               <widget class="QPushButton" name="Del_Cur_Task">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Удалить выбранную задачу</string>
                </property>
@@ -345,6 +408,17 @@
              </item>
              <item>
               <widget class="QPushButton" name="Make_Up">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Сделать выше в списке</string>
                </property>
@@ -352,6 +426,17 @@
              </item>
              <item>
               <widget class="QPushButton" name="Make_Down">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Сделать ниже в списке</string>
                </property>
@@ -359,6 +444,17 @@
              </item>
              <item>
               <widget class="QPushButton" name="Clear_List">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Очистить список задач</string>
                </property>
@@ -816,6 +912,25 @@
                  </property>
                  <property name="text">
                   <string>Число часов фокусировки за все время:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="Greeting">
+                 <property name="font">
+                  <font>
+                   <pointsize>16</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string/>
                  </property>
                 </widget>
                </item>
